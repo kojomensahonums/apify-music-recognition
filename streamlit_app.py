@@ -66,12 +66,22 @@ def wait_for_run(run_id: str):
 
 
 def fetch_output(run_id: str) -> dict:
-    out_resp = requests.get(
-        f"{APIFY_RUN_STATUS_URL}/{run_id}/output",
+    # Step 1: Get run metadata to find the default KV store
+    run_resp = requests.get(
+        f"{APIFY_RUN_STATUS_URL}/{run_id}",
         headers={"Authorization": f"Bearer {APIFY_TOKEN}"}
     )
-    out_resp.raise_for_status()
-    return out_resp.json()
+    run_resp.raise_for_status()
+    run_data = run_resp.json()["data"]
+    store_id = run_data["defaultKeyValueStoreId"]
+
+    # Step 2: Fetch the 'OUTPUT' key from the KV store
+    kv_resp = requests.get(
+        f"https://api.apify.com/v2/key-value-stores/{store_id}/records/OUTPUT",
+        headers={"Authorization": f"Bearer {APIFY_TOKEN}"}
+    )
+    kv_resp.raise_for_status()
+    return kv_resp.json()
 
 
 # -----------------------------
