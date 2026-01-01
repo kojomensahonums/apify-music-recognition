@@ -1,0 +1,9 @@
+{
+  "name": "apify-music-recognition",
+  "version": "0.0",
+  "buildTag": "latest",
+  "dockerfile": "Dockerfile",
+  "env": {
+    "PYTHONUNBUFFERED": "1"
+  }
+}
