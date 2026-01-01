@@ -6,7 +6,7 @@ import time
 # -----------------------------
 # Configuration
 # -----------------------------
-APIFY_ACTOR = "philip.boyedoku~audio-recognition-audd"
+APIFY_ACTOR = "philip.boyedoku~apify-music-recognition"
 APIFY_TOKEN = st.secrets["APIFY_TOKEN"]
 
 APIFY_RUN_URL = f"https://api.apify.com/v2/acts/{APIFY_ACTOR}/runs"
