@@ -118,7 +118,8 @@ async def main():
     if include_raw:
         output["raw"] = audd_response
 
-    await Actor.set_output(output)
+    await Actor.set_value("OUTPUT", output)
+
 
 
 if __name__ == "__main__":
